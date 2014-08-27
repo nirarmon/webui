@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Object-based init</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="codebase/dhtmlx.css"/>
+    <script src="codebase/dhtmlx.js"></script>
+    <style>
+        div#layoutObj {
+            position: relative;
+            margin-top: 20px;
+            margin-left: 20px;
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+    <script>
+
+
+        var myLayout;
+        function doOnLoad() {
+
+
+            dhtmlx.image_path = './codebase/imgs/';
+
+            var main_layout = new dhtmlXLayoutObject(document.body, '2U');
+
+            var scnarioTab = main_layout.cells('a');
+            scnarioTab.setText('Scenario');
+            var ScnarioTree = scnarioTab.attachTree();
+            ScnarioTree.setImagePath('imgs/');
+            ScnarioTree.enableDragAndDrop('1', true);
+            ScnarioTree.enableMercyDrag(1);
+            ScnarioTree.enableItemEditor(1);
+            ScnarioTree.enableSmartXMLParsing(1);
+            ScnarioTree.enableCheckBoxes(true);
+            ScnarioTree.insertNewItem(0,"1","Root");
+
+
+
+            var tabOfTabs = main_layout.cells('b');
+            var tabbar_1 = tabOfTabs.attachTabbar();
+            tabbar_1.addTab('testTree', 'Test Tree');
+            var testTree = tabbar_1.cells('testTree');
+            testTree.setActive();
+            var testRepoTree = testTree.attachTree();
+            testRepoTree.setImagePath('imgs/');
+            testRepoTree.enableDragAndDrop('1', true);
+            testRepoTree.enableMercyDrag(1);
+            testRepoTree.loadXML('tree.xml');
+
+            tabbar_1.addTab('testProp', 'Test Properties');
+            var testProp = tabbar_1.cells('testProp');
+            var layout_1 = testProp.attachLayout('2E');
+
+            var testInfo = layout_1.cells('a');
+            testInfo.setText('Test Info');
+
+            var myMenu = main_layout.attachMenu();//new dhtmlXMenuObject("layoutObj");
+            myMenu.setIconsPath("./samples/dhtmlxMenu/common/imgs");
+            // initing
+            myMenu.addNewSibling(null, "file", "File", false);
+            myMenu.addNewChild("file", 0, "new", "New", false, "new.gif");
+            myMenu.addNewSeparator("new");
+            myMenu.addNewChild("file", 2, "open", "Open", false, "open.gif");
+            myMenu.addNewChild("file", 3, "save", "Save", false, "save.gif");
+            myMenu.addNewChild("file", 4, "saveAs", "Save As...", true, null, "save_as_dis.gif");
+            myMenu.addNewSeparator("saveAs");
+            myMenu.addNewChild("file", 6, "print", "Print", false, "print.gif");
+            myMenu.addNewChild("file", 7, "pageSetup", "Page Setup", true, null, "page_setup_dis.gif");
+            myMenu.addNewSeparator("pageSetup");
+            myMenu.addNewChild("file", 12, "close", "Close", false, "close.gif");
+            myMenu.addNewSibling("file", "edit", "Edit", false);
+            myMenu.addNewChild("edit", 0, "edit_undo", "Undo", false, "undo.gif");
+            myMenu.addNewSibling("edit_undo", "edit_redo", "Redo", false, "redo.gif");
+            myMenu.addNewSeparator("edit_redo", "sep_1");
+            myMenu.addNewSibling("sep_1", "edit_select_all", "Select All", false, "select_all.gif");
+            myMenu.addNewSeparator("edit_select_all", "sep_2");
+            myMenu.addNewSibling("sep_2", "edit_cut", "Cut", false, "cut.gif");
+            myMenu.addNewSibling("edit_cut", "edit_copy", "Copy", false, "copy.gif");
+            myMenu.addNewSibling("edit_copy", "edit_paste", "Paste", false, "paste.gif");
+            myMenu.addNewSibling("edit", "help", "Help", false);
+            myMenu.addNewChild("help", 0, "about", "About...", false, "about.gif");
+            myMenu.addNewChild("help", 1, "help2", "Help", false, "help.gif");
+            myMenu.addNewChild("help", 2, "bugrep", "Bug Reporting", false, "bug_reporting.gif");
+
+        }
+
+    </script>
+</head>
+<body onload="doOnLoad();">
+<div id="layoutObj"></div>
+<div style="height: 250px;">
+    <div id="menuObj"></div>
+</div>
+
+
+</body>
+</html>
